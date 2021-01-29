@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+td {
+    width: 100px;
+    height: 100px;
+    background-color: yellowgreen;
+    text-align: center;
+
+}
+
+table {
+    border: 1px solid black;
+}
+
+.white {
+    background-color: #ffffff;
+}
+
+td img {
+    width: 80%;
+}
+
+td img:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
