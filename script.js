@@ -17,14 +17,15 @@ darks.forEach(element => {
 
 darks.forEach(element => {
     element.addEventListener("drop", e => {
-        e.preventDefault();
+        if(e.target.firstElementChild || e.target.tagName !== 'TD' ) {
+            const id = e.dataTransfer.getData("id");
+            document.getElementById(id).removeAttribute('id');
+            return;
+        }
+
         const id = e.dataTransfer.getData("id");
         let img = document.createElement('img');
         img.src = document.getElementById(id).src;
-
-        if(e.target.tagName === 'IMG' || e.target.firstElementChild) {
-            return;
-        }
         document.getElementById(id).remove();
         e.target.appendChild(img);
     });
