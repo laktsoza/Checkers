@@ -10,10 +10,10 @@ tds.forEach((element, index) => {
     }
 })
 
+let redOrBlack;
 
 darks.forEach(element => {
     
-
     element.addEventListener('dragstart', e => {
         e.target.setAttribute('id', 'taken')
         e.dataTransfer.setData('id', e.target.id);
@@ -31,9 +31,20 @@ darks.forEach(element => {
     element.addEventListener("drop", e => {
         const id = e.dataTransfer.getData("id");
         let takan = document.getElementById(id);
-        // if(e.target.classList.contains('black') && takan.parentElement.dataset.id < e.target.dataset.id) {
-        //     return;
-        // }
+        redOrBlack = takan.classList[0];
+        console.log(redOrBlack);
+
+        if(takan.classList.contains('black') && takan.parentElement.dataset.id < e.target.dataset.id) {
+            return;
+        }
+        
+
+        if(takan.classList.contains('red') && takan.parentElement.dataset.id > e.target.dataset.id) {
+            return;
+        }
+        
+        
+
         let difference;
         function differenceAbs () {
             difference = Math.abs(takan.parentElement.dataset.id - e.target.dataset.id);
@@ -54,6 +65,7 @@ darks.forEach(element => {
             }
             let img = document.createElement('img');
             img.src = document.getElementById(id).src;
+            img.classList.add(redOrBlack);
             document.getElementById(id).remove();
             e.target.appendChild(img);
         } 
