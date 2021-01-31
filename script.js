@@ -10,14 +10,13 @@ tds.forEach((element, index) => {
     }
 })
 
-let redOrBlack;
 
 darks.forEach(element => {
-    
     element.addEventListener('dragstart', e => {
         e.target.setAttribute('id', 'taken')
         e.dataTransfer.setData('id', e.target.id);
     })
+    
 });
 
 darks.forEach(element => {
@@ -29,45 +28,35 @@ darks.forEach(element => {
 darks.forEach(element => {
     
     element.addEventListener("drop", e => {
-        const id = e.dataTransfer.getData("id");
-        let takan = document.getElementById(id);
-        redOrBlack = takan.classList[0];
-        console.log(redOrBlack);
+        if (e.target.tagName !== 'TD' || e.target.firstElement) {
+            return;
+        }
+        let id = e.dataTransfer.getData('id');
+        let takenDrought = document.getElementById(id);
 
-        if(takan.classList.contains('black') && takan.parentElement.dataset.id < e.target.dataset.id) {
+        if(takenDrought.classList.contains('red') && +e.target.dataset.id < +takenDrought.parentElement.dataset.id) {
+            takenDrought.removeAttribute('id');
             return;
         }
         
-
-        if(takan.classList.contains('red') && takan.parentElement.dataset.id > e.target.dataset.id) {
+        if(takenDrought.classList.contains('black') && +e.target.dataset.id > +takenDrought.parentElement.dataset.id) {
+            takenDrought.removeAttribute('id');
             return;
         }
-        
-        
 
         let difference;
-        function differenceAbs () {
-            difference = Math.abs(takan.parentElement.dataset.id - e.target.dataset.id);
-            return difference;
+        function differenceCount () {
+            difference =  Math.abs(e.target.dataset.id - takenDrought.parentElement.dataset.id);
         }
+        differenceCount();
 
-        differenceAbs();
+        takenDrought.removeAttribute('id');
 
-        console.log(takan.parentElement.dataset.id);
-        console.log(e.target.dataset.id);
-        console.log(difference);
-        
         if(difference == 7 || difference == 9) {
-
-            if(e.target.firstElementChild || e.target.tagName !== 'TD' ) {
-                document.getElementById(id).removeAttribute('id');
-                return;
-            }
-            let img = document.createElement('img');
-            img.src = document.getElementById(id).src;
-            img.classList.add(redOrBlack);
-            document.getElementById(id).remove();
-            e.target.appendChild(img);
-        } 
+            e.target.appendChild(takenDrought);
+        }
+        if(difference == 14 || difference == 18) {
+            e.target.appendChild(takenDrought);
+        }
     });
 });

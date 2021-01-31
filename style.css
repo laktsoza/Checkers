@@ -6,7 +6,6 @@
 td {
     width: 100px;
     height: 100px;
-    background-color: yellowgreen;
     text-align: center;
 
 }
@@ -15,8 +14,8 @@ table {
     border: 1px solid black;
 }
 
-.white {
-    background-color: #ffffff;
+.dark {
+    background-color: yellowgreen;
 }
 
 td img {
