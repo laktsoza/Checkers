@@ -20,6 +20,7 @@ table {
 
 td img {
     width: 80%;
+    user-select: none;
 }
 
 td img:hover {
