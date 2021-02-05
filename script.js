@@ -20,7 +20,7 @@ darks.forEach(element => {
 
 darks.forEach(element => {
     element.addEventListener("drop", e => {
-        if (e.target.tagName !== 'TD' || e.target.firstElement) {
+        if (e.target.tagName !== 'TD' || e.target.firstElementChild) {
             return;
         }
         let id = e.dataTransfer.getData('id');
