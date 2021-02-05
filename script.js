@@ -20,12 +20,14 @@ darks.forEach(element => {
 
 darks.forEach(element => {
     element.addEventListener("drop", e => {
-        if (e.target.tagName !== 'TD' || e.target.firstElementChild) {
-            return;
-        }
         let id = e.dataTransfer.getData('id');
         let takenDraughts = document.getElementById(id);
 
+        if (e.target.tagName !== 'TD' || e.target.firstElementChild) {
+            takenDraughts.removeAttribute('id');
+            return;
+        }
+        
         let difference;
         function differenceCount () {
             difference = Math.abs(e.target.dataset.id - takenDraughts.parentElement.dataset.id);
